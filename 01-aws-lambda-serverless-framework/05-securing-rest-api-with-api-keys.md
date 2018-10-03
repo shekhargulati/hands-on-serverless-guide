@@ -135,21 +135,21 @@ As we discussed in previous post, we are using Serverless framework to build the
           cors: true
           private: true
       ```
-   ```
+   
 
 2. Once you have enabled API key security for your API methods then you should specify name of the API key under the `apiKeys` property of the provider object as shown below.
 
-   ```yaml
-   provider:
-     name: aws
-     runtime: nodejs4.3
-     stage: dev
-     region: us-east-1
-     environment:
-       CANDIDATE_TABLE: candidate-${opt:stage, self:provider.stage}
-     apiKeys:
-       - candidate-service-api-key
-   ```
+    ```yaml
+    provider:
+      name: aws
+      runtime: nodejs4.3
+      stage: dev
+      region: us-east-1
+      environment:
+        CANDIDATE_TABLE: candidate-${opt:stage, self:provider.stage}
+      apiKeys:
+        - candidate-service-api-key
+    ```
 
 Now, deploy your service using `serverless deploy` command. Serverless will create a new API key each time you deploy the application. This could be a problem when you want to stick to a key for testing. To do that don't provide any key under apiKeys section.  You can manually create API keys from web console and use them.
 
